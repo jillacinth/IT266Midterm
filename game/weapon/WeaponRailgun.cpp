@@ -4,39 +4,39 @@
 #include "../Game_local.h"
 #include "../Weapon.h"
 
-const idEventDef EV_Railgun_RestoreHum( "<railgunRestoreHum>", "" );
+const idEventDef EV_Railgun_RestoreHum("<railgunRestoreHum>", "");
 
 class rvWeaponRailgun : public rvWeapon {
 public:
 
-	CLASS_PROTOTYPE( rvWeaponRailgun );
+	CLASS_PROTOTYPE(rvWeaponRailgun);
 
-	rvWeaponRailgun ( void );
+	rvWeaponRailgun(void);
 
-	virtual void			Spawn				( void );
-	virtual void			Think				( void );
-	void					Save				( idSaveGame *savefile ) const;
-	void					Restore				( idRestoreGame *savefile );
-	void					PreSave				( void );
-	void					PostSave			( void );
-	void					ClientUnstale		( void );
+	virtual void			Spawn(void);
+	virtual void			Think(void);
+	void					Save(idSaveGame* savefile) const;
+	void					Restore(idRestoreGame* savefile);
+	void					PreSave(void);
+	void					PostSave(void);
+	void					ClientUnstale(void);
 
 protected:
 	jointHandle_t			jointBatteryView;
 
 private:
 
-	stateResult_t		State_Idle		( const stateParms_t& parms );
-	stateResult_t		State_Fire		( const stateParms_t& parms );
-	stateResult_t		State_Reload	( const stateParms_t& parms );
+	stateResult_t		State_Idle(const stateParms_t& parms);
+	stateResult_t		State_Fire(const stateParms_t& parms);
+	stateResult_t		State_Reload(const stateParms_t& parms);
 
-	void				Event_RestoreHum	( void );
+	void				Event_RestoreHum(void);
 
-	CLASS_STATES_PROTOTYPE ( rvWeaponRailgun );
+	CLASS_STATES_PROTOTYPE(rvWeaponRailgun);
 };
 
-CLASS_DECLARATION( rvWeapon, rvWeaponRailgun )
-	EVENT( EV_Railgun_RestoreHum,			rvWeaponRailgun::Event_RestoreHum )
+CLASS_DECLARATION(rvWeapon, rvWeaponRailgun)
+EVENT(EV_Railgun_RestoreHum, rvWeaponRailgun::Event_RestoreHum)
 END_CLASS
 
 /*
@@ -44,7 +44,7 @@ END_CLASS
 rvWeaponRailgun::rvWeaponRailgun
 ================
 */
-rvWeaponRailgun::rvWeaponRailgun ( void ) {
+rvWeaponRailgun::rvWeaponRailgun(void) {
 }
 
 /*
@@ -52,8 +52,8 @@ rvWeaponRailgun::rvWeaponRailgun ( void ) {
 rvWeaponRailgun::Spawn
 ================
 */
-void rvWeaponRailgun::Spawn ( void ) {
-	SetState ( "Raise", 0 );	
+void rvWeaponRailgun::Spawn(void) {
+	SetState("Raise", 0);
 }
 
 /*
@@ -61,8 +61,8 @@ void rvWeaponRailgun::Spawn ( void ) {
 rvWeaponRailgun::Save
 ================
 */
-void rvWeaponRailgun::Save ( idSaveGame *savefile ) const {
-	savefile->WriteJoint( jointBatteryView );
+void rvWeaponRailgun::Save(idSaveGame* savefile) const {
+	savefile->WriteJoint(jointBatteryView);
 }
 
 /*
@@ -70,8 +70,8 @@ void rvWeaponRailgun::Save ( idSaveGame *savefile ) const {
 rvWeaponRailgun::Restore
 ================
 */
-void rvWeaponRailgun::Restore ( idRestoreGame *savefile ) {
-	savefile->ReadJoint( jointBatteryView );
+void rvWeaponRailgun::Restore(idRestoreGame* savefile) {
+	savefile->ReadJoint(jointBatteryView);
 }
 
 /*
@@ -79,10 +79,10 @@ void rvWeaponRailgun::Restore ( idRestoreGame *savefile ) {
 rvWeaponRailgun::PreSave
 ================
 */
-void rvWeaponRailgun::PreSave ( void ) {
+void rvWeaponRailgun::PreSave(void) {
 
 	//this should shoosh the humming but not the shooting sound.
-	StopSound( SND_CHANNEL_BODY2, 0);
+	StopSound(SND_CHANNEL_BODY2, 0);
 }
 
 /*
@@ -90,10 +90,10 @@ void rvWeaponRailgun::PreSave ( void ) {
 rvWeaponRailgun::PostSave
 ================
 */
-void rvWeaponRailgun::PostSave ( void ) {
+void rvWeaponRailgun::PostSave(void) {
 
 	//restore the humming
-	PostEventMS( &EV_Railgun_RestoreHum, 10);
+	PostEventMS(&EV_Railgun_RestoreHum, 10);
 }
 
 /*
@@ -101,31 +101,31 @@ void rvWeaponRailgun::PostSave ( void ) {
 rvWeaponRailgun::Think
 ================
 */
-void rvWeaponRailgun::Think ( void ) {
+void rvWeaponRailgun::Think(void) {
 
 	// Let the real weapon think first
-	rvWeapon::Think ( );
+	rvWeapon::Think();
 
-	if ( zoomGui && wsfl.zoom && !gameLocal.isMultiplayer ) {
+	if (zoomGui && wsfl.zoom && !gameLocal.isMultiplayer) {
 		int ammo = AmmoInClip();
-		if ( ammo >= 0 ) {
-			zoomGui->SetStateInt( "player_ammo", ammo );
-		}			
+		if (ammo >= 0) {
+			zoomGui->SetStateInt("player_ammo", ammo);
+		}
 	}
 }
 
 /*
 ===============================================================================
 
-	States 
+	States
 
 ===============================================================================
 */
 
-CLASS_STATES_DECLARATION ( rvWeaponRailgun )
-	STATE ( "Idle",				rvWeaponRailgun::State_Idle)
-	STATE ( "Fire",				rvWeaponRailgun::State_Fire )
-	STATE ( "Reload",			rvWeaponRailgun::State_Reload )
+CLASS_STATES_DECLARATION(rvWeaponRailgun)
+STATE("Idle", rvWeaponRailgun::State_Idle)
+STATE("Fire", rvWeaponRailgun::State_Fire)
+STATE("Reload", rvWeaponRailgun::State_Reload)
 END_CLASS_STATES
 
 /*
@@ -133,43 +133,44 @@ END_CLASS_STATES
 rvWeaponRailgun::State_Idle
 ================
 */
-stateResult_t rvWeaponRailgun::State_Idle( const stateParms_t& parms ) {
+stateResult_t rvWeaponRailgun::State_Idle(const stateParms_t& parms) {
 	enum {
 		STAGE_INIT,
 		STAGE_WAIT,
-	};	
-	switch ( parms.stage ) {
-		case STAGE_INIT:
-			if ( !AmmoAvailable ( ) ) {
-				SetStatus ( WP_OUTOFAMMO );
-			} else {
-				StopSound( SND_CHANNEL_BODY2, false );
-				StartSound( "snd_idle_hum", SND_CHANNEL_BODY2, 0, false, NULL );
-				SetStatus ( WP_READY );
-			}
-			PlayCycle( ANIMCHANNEL_ALL, "idle", parms.blendFrames );
-			return SRESULT_STAGE ( STAGE_WAIT );
-		
-		case STAGE_WAIT:			
-			if ( wsfl.lowerWeapon ) {
-				StopSound( SND_CHANNEL_BODY2, false );
-				SetState ( "Lower", 4 );
-				return SRESULT_DONE;
-			}		
-			if ( gameLocal.time > nextAttackTime && wsfl.attack && AmmoInClip ( ) ) {
-				SetState ( "Fire", 0 );
-				return SRESULT_DONE;
-			}  
-			// Auto reload?
-			if ( AutoReload() && !AmmoInClip ( ) && AmmoAvailable () ) {
-				SetState ( "reload", 2 );
-				return SRESULT_DONE;
-			}
-			if ( wsfl.netReload || (wsfl.reload && AmmoInClip() < ClipSize() && AmmoAvailable()>AmmoInClip()) ) {
-				SetState ( "Reload", 4 );
-				return SRESULT_DONE;			
-			}
-			return SRESULT_WAIT;
+	};
+	switch (parms.stage) {
+	case STAGE_INIT:
+		if (!AmmoAvailable()) {
+			SetStatus(WP_OUTOFAMMO);
+		}
+		else {
+			StopSound(SND_CHANNEL_BODY2, false);
+			StartSound("snd_idle_hum", SND_CHANNEL_BODY2, 0, false, NULL);
+			SetStatus(WP_READY);
+		}
+		PlayCycle(ANIMCHANNEL_ALL, "idle", parms.blendFrames);
+		return SRESULT_STAGE(STAGE_WAIT);
+
+	case STAGE_WAIT:
+		if (wsfl.lowerWeapon) {
+			StopSound(SND_CHANNEL_BODY2, false);
+			SetState("Lower", 4);
+			return SRESULT_DONE;
+		}
+		if (gameLocal.time > nextAttackTime && wsfl.attack && AmmoInClip()) {
+			SetState("Fire", 0);
+			return SRESULT_DONE;
+		}
+		// Auto reload?
+		if (AutoReload() && !AmmoInClip() && AmmoAvailable()) {
+			SetState("reload", 2);
+			return SRESULT_DONE;
+		}
+		if (wsfl.netReload || (wsfl.reload && AmmoInClip() < ClipSize() && AmmoAvailable() > AmmoInClip())) {
+			SetState("Reload", 4);
+			return SRESULT_DONE;
+		}
+		return SRESULT_WAIT;
 	}
 	return SRESULT_ERROR;
 }
@@ -179,25 +180,28 @@ stateResult_t rvWeaponRailgun::State_Idle( const stateParms_t& parms ) {
 rvWeaponRailgun::State_Fire
 ================
 */
-stateResult_t rvWeaponRailgun::State_Fire ( const stateParms_t& parms ) {
+stateResult_t rvWeaponRailgun::State_Fire(const stateParms_t& parms) {
+	idPlayer* player = gameLocal.GetLocalPlayer();
+
 	enum {
 		STAGE_INIT,
 		STAGE_WAIT,
-	};	
-	switch ( parms.stage ) {
-		case STAGE_INIT:
-			nextAttackTime = gameLocal.time + (fireRate * owner->PowerUpModifier ( PMOD_FIRERATE ));
-			Attack ( false, 1, spread, 0, 1.0f );
-			PlayAnim ( ANIMCHANNEL_ALL, "fire", 0 );	
-			return SRESULT_STAGE ( STAGE_WAIT );
-	
-		case STAGE_WAIT:		
-			if ( ( gameLocal.isMultiplayer && gameLocal.time >= nextAttackTime ) || 
-				 ( !gameLocal.isMultiplayer && ( AnimDone ( ANIMCHANNEL_ALL, 2 ) ) ) ) {
-				SetState ( "Idle", 0 );
-				return SRESULT_DONE;
-			}		
-			return SRESULT_WAIT;
+	};
+	switch (parms.stage) {
+	case STAGE_INIT:
+		nextAttackTime = gameLocal.time + (fireRate * owner->PowerUpModifier(PMOD_FIRERATE));
+		//Attack ( false, 1, spread, 0, 1.0f );
+		player->GivePowerUp(POWERUP_INVISIBILITY, SEC2MS(30.0f));
+		PlayAnim(ANIMCHANNEL_ALL, "fire", 0);
+		return SRESULT_STAGE(STAGE_WAIT);
+
+	case STAGE_WAIT:
+		if ((gameLocal.isMultiplayer && gameLocal.time >= nextAttackTime) ||
+			(!gameLocal.isMultiplayer && (AnimDone(ANIMCHANNEL_ALL, 2)))) {
+			SetState("Idle", 0);
+			return SRESULT_DONE;
+		}
+		return SRESULT_WAIT;
 	}
 	return SRESULT_ERROR;
 }
@@ -208,35 +212,36 @@ stateResult_t rvWeaponRailgun::State_Fire ( const stateParms_t& parms ) {
 rvWeaponRailgun::State_Reload
 ================
 */
-stateResult_t rvWeaponRailgun::State_Reload ( const stateParms_t& parms ) {
+stateResult_t rvWeaponRailgun::State_Reload(const stateParms_t& parms) {
 	enum {
 		STAGE_INIT,
 		STAGE_WAIT,
-	};	
-	switch ( parms.stage ) {
-		case STAGE_INIT:
-			if ( wsfl.netReload ) {
-				wsfl.netReload = false;
-			} else {
-				NetReload ( );
-			}
-						
-			SetStatus ( WP_RELOAD );
-			PlayAnim ( ANIMCHANNEL_ALL, "reload", parms.blendFrames );
-			return SRESULT_STAGE ( STAGE_WAIT );
-			
-		case STAGE_WAIT:
-			if ( AnimDone ( ANIMCHANNEL_ALL, 4 ) ) {
-				AddToClip ( ClipSize() );
-				SetState ( "Idle", 4 );
-				return SRESULT_DONE;
-			}
-			if ( wsfl.lowerWeapon ) {
-				StopSound( SND_CHANNEL_BODY2, false );
-				SetState ( "Lower", 4 );
-				return SRESULT_DONE;
-			}
-			return SRESULT_WAIT;
+	};
+	switch (parms.stage) {
+	case STAGE_INIT:
+		if (wsfl.netReload) {
+			wsfl.netReload = false;
+		}
+		else {
+			NetReload();
+		}
+
+		SetStatus(WP_RELOAD);
+		PlayAnim(ANIMCHANNEL_ALL, "reload", parms.blendFrames);
+		return SRESULT_STAGE(STAGE_WAIT);
+
+	case STAGE_WAIT:
+		if (AnimDone(ANIMCHANNEL_ALL, 4)) {
+			AddToClip(ClipSize());
+			SetState("Idle", 4);
+			return SRESULT_DONE;
+		}
+		if (wsfl.lowerWeapon) {
+			StopSound(SND_CHANNEL_BODY2, false);
+			SetState("Lower", 4);
+			return SRESULT_DONE;
+		}
+		return SRESULT_WAIT;
 	}
 	return SRESULT_ERROR;
 }
@@ -244,7 +249,7 @@ stateResult_t rvWeaponRailgun::State_Reload ( const stateParms_t& parms ) {
 /*
 ===============================================================================
 
-	Event 
+	Event
 
 ===============================================================================
 */
@@ -254,9 +259,9 @@ stateResult_t rvWeaponRailgun::State_Reload ( const stateParms_t& parms ) {
 rvWeaponRailgun::State_Reload
 ================
 */
-void rvWeaponRailgun::Event_RestoreHum ( void ) {
-	StopSound( SND_CHANNEL_BODY2, false );
-	StartSound( "snd_idle_hum", SND_CHANNEL_BODY2, 0, false, NULL );
+void rvWeaponRailgun::Event_RestoreHum(void) {
+	StopSound(SND_CHANNEL_BODY2, false);
+	StartSound("snd_idle_hum", SND_CHANNEL_BODY2, 0, false, NULL);
 }
 
 /*
@@ -264,7 +269,7 @@ void rvWeaponRailgun::Event_RestoreHum ( void ) {
 rvWeaponRailgun::ClientUnStale
 ================
 */
-void rvWeaponRailgun::ClientUnstale( void ) {
+void rvWeaponRailgun::ClientUnstale(void) {
 	Event_RestoreHum();
 }
 
