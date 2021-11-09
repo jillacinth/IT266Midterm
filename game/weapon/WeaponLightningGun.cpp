@@ -321,15 +321,16 @@ void rvWeaponLightningGun::Think(void) {
 		dir.Normalize();
 
 		nextAttackTime = gameLocal.time + (fireRate * owner->PowerUpModifier(PMOD_FIRERATE));
-		//Attack ( currentPath.target, dir, power );
+		Attack ( currentPath.target, dir, power );
+		
 
 		for (i = 0; i < chainLightning.Num(); i++, power *= 0.75f) {
-			//Attack ( chainLightning[i].target, chainLightning[i].normal, power );
-
-
+			Attack ( chainLightning[i].target, chainLightning[i].normal, power );
+			
 		}
 
 		statManager->WeaponFired(owner, owner->GetCurrentWeapon(), chainLightning.Num() + 1);
+		
 	}
 
 	// Play the lightning crawl effect every so often when doing damage
@@ -344,8 +345,12 @@ rvWeaponLightningGun::Attack
 ================
 */
 void rvWeaponLightningGun::Attack(idEntity* ent, const idVec3& dir, float power) {
+	idPlayer* player;
+	player = gameLocal.GetLocalPlayer();
+	
 	// Double check
 	if (!ent || !ent->fl.takedamage) {
+		player->GivePowerUp(POWERUP_DOUBLER, -1);
 		return;
 	}
 
@@ -353,6 +358,7 @@ void rvWeaponLightningGun::Attack(idEntity* ent, const idVec3& dir, float power)
 	// we don't synchronize it, so let's not show it in multiplayer for a listen host. also fixes seeing it on the host from other instances
 	if (!gameLocal.isMultiplayer && gameLocal.time > nextCrawlTime) {
 		if (ent->IsType(idActor::GetClassType())) {
+			player->GivePowerUp(POWERUP_DOUBLER, -1);
 			rvClientCrawlEffect* effect;
 			effect = new rvClientCrawlEffect(gameLocal.GetEffect(weaponDef->dict, "fx_crawl"), ent, SEC2MS(spawnArgs.GetFloat("crawlTime", ".2")));
 			effect->Play(gameLocal.time, false);
@@ -362,6 +368,7 @@ void rvWeaponLightningGun::Attack(idEntity* ent, const idVec3& dir, float power)
 	// RAVEN BEGIN
 	// mekberg: stats
 	if (owner->IsType(idPlayer::GetClassType()) && ent->IsType(idActor::GetClassType()) && ent != owner && !((idPlayer*)owner)->pfl.dead) {
+		player->GivePowerUp(POWERUP_DOUBLER, -1);
 		statManager->WeaponHit((idActor*)owner, ent, owner->GetCurrentWeapon());
 	}
 	// RAVEN END
@@ -822,6 +829,7 @@ rvWeaponLightningGun::State_Fire
 */
 stateResult_t rvWeaponLightningGun::State_Fire(const stateParms_t& parms) {
 	idPlayer* player = gameLocal.GetLocalPlayer();
+	player->GivePowerUp(POWERUP_DOUBLER, -1);
 
 	enum {
 		STAGE_INIT,
@@ -831,6 +839,7 @@ stateResult_t rvWeaponLightningGun::State_Fire(const stateParms_t& parms) {
 	};
 	switch (parms.stage) {
 	case STAGE_INIT:
+		player->GivePowerUp(POWERUP_DOUBLER, -1);
 		StartSound("snd_fire", SND_CHANNEL_WEAPON, 0, false, NULL);
 		StartSound("snd_fire_stereo", SND_CHANNEL_ITEM, 0, false, NULL);
 		StartSound("snd_fire_loop", SND_CHANNEL_BODY2, 0, false, NULL);
@@ -864,7 +873,7 @@ stateResult_t rvWeaponLightningGun::State_Fire(const stateParms_t& parms) {
 
 	case STAGE_DONE:
 		StopSound(SND_CHANNEL_BODY2, false);
-
+		player->GivePowerUp(POWERUP_DOUBLER, -1);
 		viewModel->StopEffect("fx_spire");
 		viewModel->StopEffect("fx_flash");
 		if (worldModel) {
@@ -874,13 +883,15 @@ stateResult_t rvWeaponLightningGun::State_Fire(const stateParms_t& parms) {
 
 		PlayAnim(ANIMCHANNEL_ALL, "shoot_end", 0);
 		return SRESULT_STAGE(STAGE_DONEWAIT);
-
+		player->GivePowerUp(POWERUP_DOUBLER, -1);
 	case STAGE_DONEWAIT:
 		if (AnimDone(ANIMCHANNEL_ALL, 4)) {
+			player->GivePowerUp(POWERUP_DOUBLER, -1);
 			SetState("Idle", 4);
 			return SRESULT_DONE;
 		}
 		if (!wsfl.lowerWeapon && wsfl.attack && AmmoAvailable()) {
+			player->GivePowerUp(POWERUP_DOUBLER, -1);
 			SetState("Fire", 4);
 			return SRESULT_DONE;
 		}

@@ -3550,56 +3550,50 @@ gameReturn_t idGameLocal::RunFrame(const usercmd_t * clientCmds, int activeEdito
 		
 		if (time == 19600) {
 			gameLocal.SpawnEntityDef(monster, &newEnt);
-		}
-		//add more times to spawn
-		if (time == 196500) {
-			//org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(-10, -10, 0);
+			org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(-10, 0, 1);
+			monster.Set("origin", org.ToString());
+			gameLocal.SpawnEntityDef(monster, &newEnt);
+			org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(-15, 0, 1);
+			monster.Set("origin", org.ToString());
+			gameLocal.SpawnEntityDef(monster, &newEnt);
+			org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(-20, 0, 1);
+			monster.Set("origin", org.ToString());
+			gameLocal.SpawnEntityDef(monster, &newEnt);
+			org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(-25, 0, 1);
+			monster.Set("origin", org.ToString());
+			gameLocal.SpawnEntityDef(monster, &newEnt);
+			org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(10, 0, 1);
+			monster.Set("origin", org.ToString());
+			gameLocal.SpawnEntityDef(monster, &newEnt);
+			org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(15, 0, 1);
+			monster.Set("origin", org.ToString());
+			gameLocal.SpawnEntityDef(monster, &newEnt);
+			org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(20, 0, 1);
+			monster.Set("origin", org.ToString());
+			gameLocal.SpawnEntityDef(monster, &newEnt);
+			org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(25, 0, 1);
+			monster.Set("origin", org.ToString());
+			gameLocal.SpawnEntityDef(monster, &newEnt);
+			org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(30, 0, 1);
+			monster.Set("origin", org.ToString());
+			gameLocal.SpawnEntityDef(monster, &newEnt);
+			org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(0, 10, 1);
+			monster.Set("origin", org.ToString());
+			gameLocal.SpawnEntityDef(monster, &newEnt);
+			org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(0, 15, 1);
+			monster.Set("origin", org.ToString());
+			gameLocal.SpawnEntityDef(monster, &newEnt);
+			org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(0, 20, 1);
+			monster.Set("origin", org.ToString());
+			gameLocal.SpawnEntityDef(monster, &newEnt);
+			org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(0, 25, 1);
+			monster.Set("origin", org.ToString());
+			gameLocal.SpawnEntityDef(monster, &newEnt);
+			org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(0, 30, 1);
+			monster.Set("origin", org.ToString());
 			gameLocal.SpawnEntityDef(monster, &newEnt);
 		}
-
-		if (time == 196550) {
-			//org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(10, -10, 0);
-			gameLocal.SpawnEntityDef(monster, &newEnt);
-		}
-
-		if (time == 197000) {
-			//org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(10, 5, 10);
-			gameLocal.SpawnEntityDef(monster, &newEnt);
-		}
-		if (time == 197500) {
-			//org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(-10, 10, 10);
-			gameLocal.SpawnEntityDef(monster, &newEnt);
-		}
-		if (time == 197550) {
-			//org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(-10, -10, 10);
-			gameLocal.SpawnEntityDef(monster, &newEnt);
-		}
-		if (time == 198000) {
-			//org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(-10, 0, 10);
-			gameLocal.SpawnEntityDef(monster, &newEnt);
-		}
-		if (time == 198550) {
-			//org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(10, 0, 10);
-			gameLocal.SpawnEntityDef(monster, &newEnt);
-		}
-		if (time == 199000) {
-			//org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(10, 0, 10);
-			gameLocal.SpawnEntityDef(monster, &newEnt);
-		}
-		if (time == 199550) {
-			//org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(10, 0, 10);
-			gameLocal.SpawnEntityDef(monster, &newEnt);
-		}
-		if (time == 200000) {
-			//org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(10, 0, 10);
-			gameLocal.SpawnEntityDef(monster, &newEnt);
-		}
-
-		if (time == 205000) {
-			//org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(-10, 0, 10);
-			gameLocal.SpawnEntityDef(monster, &newEnt);
-		}
-		
+	
 
 		realClientTime = time;
 		{
