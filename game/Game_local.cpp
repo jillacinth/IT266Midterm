@@ -3519,7 +3519,7 @@ gameReturn_t idGameLocal::RunFrame(const usercmd_t * clientCmds, int activeEdito
 	monster.Set("classname", "monster_grunt");
 	monster.Set("angle", va("%f", yaw + 180));
 
-	org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(0, 0, 1);
+	org = player->GetPhysics()->GetOrigin() + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(10, 0, 1);
 	monster.Set("origin", org.ToString());
 
 
