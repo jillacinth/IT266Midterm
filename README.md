@@ -15,5 +15,5 @@ Weapons: <br />
 7. Hyperblaster: Ammoregen<br />
 8. Grenade Launcher: Scout<br />
 9. Dark matter Gun: invinsibility <br />
-10. Lightning Gun: <br />
+10. Lightning Gun: doubler <br />
 
