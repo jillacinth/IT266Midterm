@@ -821,7 +821,7 @@ rvWeaponLightningGun::State_Fire
 ================
 */
 stateResult_t rvWeaponLightningGun::State_Fire(const stateParms_t& parms) {
-
+	idPlayer* player = gameLocal.GetLocalPlayer();
 
 	enum {
 		STAGE_INIT,
@@ -839,6 +839,7 @@ stateResult_t rvWeaponLightningGun::State_Fire(const stateParms_t& parms) {
 
 		viewModel->PlayEffect("fx_spire", spireJointView, true);
 		viewModel->PlayEffect("fx_flash", barrelJointView, true);
+		player->GivePowerUp(POWERUP_DOUBLER, -1);
 
 		if (worldModel && flashJointWorld != INVALID_JOINT) {
 			worldModel->PlayEffect(gameLocal.GetEffect(weaponDef->dict, "fx_flash_world"), flashJointWorld, vec3_origin, mat3_identity, true);
@@ -849,12 +850,13 @@ stateResult_t rvWeaponLightningGun::State_Fire(const stateParms_t& parms) {
 
 	case STAGE_ATTACKLOOP:
 		if (!wsfl.attack || wsfl.lowerWeapon || !AmmoAvailable()) {
+			player->GivePowerUp(POWERUP_DOUBLER, -1);
 			return SRESULT_STAGE(STAGE_DONE);
 		}
 		if (AnimDone(ANIMCHANNEL_ALL, 0)) {
 			PlayCycle(ANIMCHANNEL_ALL, "shoot_loop", 0);
-			if (!gameLocal.isMultiplayer
-				&& owner == gameLocal.GetLocalPlayer()) {
+			if (!gameLocal.isMultiplayer && owner == gameLocal.GetLocalPlayer()) {
+				player->GivePowerUp(POWERUP_DOUBLER, -1);
 				owner->playerView.SetShakeParms(MS2SEC(gameLocal.GetTime() + 500), 2.0f);
 			}
 		}
