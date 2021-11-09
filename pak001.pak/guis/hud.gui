@@ -2330,17 +2330,6 @@ windowDef Desktop
 		}
 
 	}
-	windowDef anim_levelExitAlert
-	{
-		rect	0,0,0.1,0.1
-		visible	0
-		notime	1
-
-		onTime 5000 {
-			set "p_exit_level::visible" "0";
-		}
-
-	}
 	windowDef anim_fade1
 	{
 		rect	0,0,1,1
@@ -2363,6 +2352,20 @@ windowDef Desktop
 		forecolor	1,1,1,1
 		text	"Stars Collected: 0"
 		textscale	0.6
+		backcolor	0,1,1,0
+		textstyle	2
+		nowrap	1
+	}
+	windowDef anim_levelExitAlert
+	{
+		rect	0,0,0.1,0.1
+		visible	0
+		notime	1
+
+		onTime 5000 {
+			set "p_exit_level::visible" "0";
+		}
+
 	}
 	windowDef level
 	{
@@ -2371,5 +2374,7 @@ windowDef Desktop
 		forecolor	1,1,1,1
 		text	"Level: 1"
 		textscale	0.6
+		textstyle	2
+		nowrap	1
 	}
 }

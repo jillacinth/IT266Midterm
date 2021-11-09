@@ -812,13 +812,6 @@ windowDef Desktop
 				background	"gfx/guis/mainmenu/q4logo"
 				matcolor	1,1,1,1
 			}
-			windowDef q4text
-			{
-				rect	6,119,376,92
-				visible	1
-				background	"gfx/guis/mainmenu/q4text"
-				matcolor	1,1,1,1
-			}
 			windowDef main_b1
 			{
 				rect	0,202,413,52
@@ -912,8 +905,8 @@ windowDef Desktop
 				rect	44,274,314,23
 				visible	1
 				forecolor	1,1,1,0.8
-				text	"#str_200002"
-				textscale	.33
+				text	"help"
+				textscale	0.33
 				font	"fonts/marine"
 			}
 			windowDef main_t_b4
@@ -1012,6 +1005,16 @@ windowDef Desktop
 				forecolor	1,1,1,0.8
 				text	"gui::motdMessage"
 				textscale	.22
+				font	"fonts/lowpixel"
+			}
+			windowDef q4text
+			{
+				rect	20,140,376,92
+				visible	1
+				forecolor	1,1,1,1
+				text	"Star Collector"
+				textscale	1
+				textstyle	2
 				font	"fonts/lowpixel"
 			}
 		}
@@ -1871,106 +1874,21 @@ windowDef Desktop
 		{
 			rect	0,0,640,480
 			visible	0
-			windowDef t_mp_title
-			{
-				rect	39,19,314,16
-				visible	1
-				forecolor	1,1,1,0
-				text	"#str_200002"
-				textscale	.25
-				font	"fonts/marine"
-			}
-			windowDef mp_b1
-			{
-				rect	0,169,413,52
-				visible	1
-				background	"gfx/guis/mainmenu/b1_dark"
-				matcolor	1,1,1,0.4
-			}
-			windowDef mp_b2
-			{
-				rect	0,199,413,52
-				visible	1
-				background	"gfx/guis/mainmenu/b1_dark"
-				matcolor	1,1,1,0.4
-			}
-			windowDef mp_b3
-			{
-				rect	0,229,413,52
-				visible	1
-				background	"gfx/guis/mainmenu/b1_dark"
-				matcolor	1,1,1,0.4
-			}
-			windowDef mp_b4
-			{
-				rect	0,259,413,52
-				visible	1
-				background	"gfx/guis/mainmenu/b1_dark"
-				matcolor	1,1,1,0.4
-			}
-			windowDef mp_t_b1
-			{
-				rect	44,181,320,23
-				visible	1
-				forecolor	1,1,1,0.8
-				text	"#str_200023"
-				textscale	.31
-				font	"fonts/marine"
-			}
-			windowDef mp_t_b2
-			{
-				rect	44,211,320,23
-				visible	1
-				forecolor	1,1,1,0.8
-				text	"#str_200024"
-				textscale	.31
-				font	"fonts/marine"
-			}
-			windowDef mp_t_b3
-			{
-				rect	44,241,320,23
-				visible	1
-				forecolor	1,1,1,0.8
-				text	"#str_200026"
-				textscale	.31
-				font	"fonts/marine"
-			}
-			windowDef mp_t_b4
-			{
-				rect	44,271,320,23
-				visible	1
-				forecolor	1,1,1,0.8
-				text	"#str_200009"
-				textscale	.31
-				font	"fonts/marine"
-			}
-			windowDef mp_b1_corner
-			{
-				rect	32,188,12,12
-				visible	1
-				background	"gfx/guis/mainmenu/corner"
-				matcolor	0.564,0.603,0.286,0.4
-			}
-			windowDef mp_b2_corner
-			{
-				rect	32,218,12,12
-				visible	1
-				background	"gfx/guis/mainmenu/corner"
-				matcolor	0.564,0.603,0.286,0.4
-			}
 			windowDef mp_b3_corner
 			{
-				rect	32,248,12,12
+				rect	10,280,610,80
 				visible	1
-				background	"gfx/guis/mainmenu/corner"
-				matcolor	0.564,0.603,0.286,0.4
+				forecolor	1,1,1,1
+				text	"Use and collect weapons to spawn powerups and allies"
+				textscale	0.6
 			}
 			windowDef mp_b4_corner
 			{
-				rect	32,278,12,12
+				rect	10,110,300,60
 				visible	1
-				background	"gfx/guis/mainmenu/corner"
-				matcolor	0.564,0.603,0.286,0.4
+				forecolor	1,1,1,1
+				text	"Controls:"
+				textscale	1
 			}
 			windowDef mp_back
 			{
@@ -15881,7 +15799,7 @@ windowDef Desktop
 	}
 	windowDef p_video
 	{
-		rect	0,0,640,480
+		rect	10,0,640,480
 		visible	1
 		notime	1
 
@@ -18963,7 +18881,7 @@ windowDef Desktop
 	}
 	windowDef p_btns
 	{
-		rect	0,10,640,480
+		rect	10,10,640,480
 		visible	1
 
 		onNamedEvent showMain {
@@ -20063,7 +19981,7 @@ windowDef Desktop
 		}
 		windowDef main_b_loadgame
 		{
-			rect	24,244,333,26
+			rect	80,360,333,26
 			visible	1
 
 			onMouseEnter {
