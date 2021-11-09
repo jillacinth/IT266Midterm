@@ -1,0 +1,50 @@
+windowDef Desktop
+{
+	rect	0,0,640,480
+	visible	1
+	bordersize	10
+	bordercolor	0,0,0,1
+	forecolor	1,1,1,1
+	text	"Star Relay"
+	textscale	2.5
+	textalign	1
+	textstyle	1
+	textaligny	25
+	font	"fonts/chain"
+	background	"gfx/guis/common/strogg/airdef_logo"
+	matcolor	1,1,1,1
+	variablebackground	1
+	backcolor	0,0,0.627,1
+	windowDef button1
+	{
+		rect	160,210,290,80
+		visible	1
+		backcolor	1,1,0.501,1
+		bordersize	5
+		bordercolor	0,0,0,1
+		forecolor	0.250,0,0.250,1
+		text	"Start Game"
+		textscale	1
+		textstyle	2
+		textalignx	5
+
+		onAction {
+			set “cmd” “play guisound_beep2”;
+			set “cmd” “activate”;
+		}
+
+	}
+	windowDef button2
+	{
+		rect	160,310,290,79
+		visible	1
+		backcolor	1,1,0.501,1
+		bordersize	5
+		bordercolor	0,0,0,1
+		forecolor	0.247,0,0.247,1
+		text	"Settings"
+		textscale	1
+		textstyle	2
+		textalignx	40
+	}
+}
