@@ -832,6 +832,12 @@ windowDef Desktop
 				visible	1
 				background	"gfx/guis/mainmenu/b1_dark"
 				matcolor	1,1,1,0.4
+				forecolor	1,1,1,1
+				text	"Help"
+				textscale	0.33
+				font	"fonts/marine"
+				textalignx	45
+				textaligny	10
 			}
 			windowDef main_b4
 			{
@@ -903,9 +909,9 @@ windowDef Desktop
 			windowDef main_t_b3
 			{
 				rect	44,274,314,23
-				visible	1
+				visible	0
 				forecolor	1,1,1,0.8
-				text	"help"
+				text	"Help"
 				textscale	0.33
 				font	"fonts/marine"
 			}
@@ -1874,15 +1880,15 @@ windowDef Desktop
 		{
 			rect	0,0,640,480
 			visible	0
-			windowDef mp_b3_corner
+			windowDef objective
 			{
-				rect	10,280,610,80
+				rect	10,260,610,80
 				visible	1
 				forecolor	1,1,1,1
-				text	"Use and collect weapons to spawn powerups and allies"
+				text	"Use and collectob weapons to spawn powerups and allies"
 				textscale	0.6
 			}
-			windowDef mp_b4_corner
+			windowDef control
 			{
 				rect	10,110,300,60
 				visible	1
@@ -1912,6 +1918,30 @@ windowDef Desktop
 				text	"#str_200018"
 				textscale	.28
 				font	"fonts/marine"
+			}
+			windowDef controlinstructions
+			{
+				rect	10,160,610,40
+				visible	1
+				forecolor	1,1,1,1
+				text	"WASD to move and SPACE to jump"
+				textscale	0.6
+			}
+			windowDef towin
+			{
+				rect	10,200,300,60
+				visible	1
+				forecolor	1,1,1,1
+				text	"To Win:"
+				textscale	1
+			}
+			windowDef survive
+			{
+				rect	10,330,610,80
+				visible	1
+				forecolor	1,1,1,1
+				text	"Enemies will spawn and chase you. \n Collect stars to win. good luck!"
+				textscale	0.6
 			}
 		}
 		windowDef p_mp_browse
@@ -18881,7 +18911,7 @@ windowDef Desktop
 	}
 	windowDef p_btns
 	{
-		rect	10,10,640,480
+		rect	20,10,640,480
 		visible	1
 
 		onNamedEvent showMain {
@@ -20106,7 +20136,7 @@ windowDef Desktop
 		}
 		windowDef main_b_multiplayer
 		{
-			rect	24,274,333,26
+			rect	20,270,333,26
 			visible	1
 
 			onMouseEnter {
@@ -20144,7 +20174,7 @@ windowDef Desktop
 		}
 		windowDef main_b_settings
 		{
-			rect	24,304,333,26
+			rect	30,300,333,26
 			visible	1
 
 			onMouseEnter {
