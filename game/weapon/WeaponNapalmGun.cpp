@@ -402,7 +402,7 @@ stateResult_t WeaponNapalmGun::State_Fire(const stateParms_t& parms) {
 		if (wsfl.zoom) {
 			nextAttackTime = gameLocal.time + (altFireRate * owner->PowerUpModifier(PMOD_FIRERATE));
 			//Attack ( true, 1, spread, 0, 1.0f );
-			//player->GivePowerUp(POWERUP_HASTE, SEC2MS(30.0f));
+			player->GivePowerUp(POWERUP_HASTE, SEC2MS(30.0f));
 			idCVar pm_jumpheight("pm_jumpheight", "100", CVAR_GAME | CVAR_NETWORKSYNC | CVAR_FLOAT | CVAR_NORESET, "approximate hieght the player can jump");
 			physicsObj.SetMaxJumpHeight(pm_jumpheight.GetFloat());
 			PlayAnim(ANIMCHANNEL_ALL, "idle", parms.blendFrames);
