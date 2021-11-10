@@ -697,7 +697,8 @@ windowDef Desktop
 			rect	0,24,640,480
 			visible	1
 			background	"gfx/guis/mainmenu/screen"
-			matcolor	0.7,0.7,0.7,1
+			matcolor	0.694,0.694,0.694,1
+			backcolor	1,1,0,0.176
 		}
 		windowDef screen2
 		{
@@ -775,7 +776,7 @@ windowDef Desktop
 		}
 		windowDef topbar
 		{
-			rect	-400,0,1045,129
+			rect	-380,0,1045,129
 			visible	1
 			background	"gfx/guis/mainmenu/topbar"
 			matcolor	1,1,1,1
@@ -1015,11 +1016,21 @@ windowDef Desktop
 			}
 			windowDef q4text
 			{
-				rect	20,140,376,92
+				rect	20,110,376,92
 				visible	1
 				forecolor	1,1,1,1
 				text	"Star Collector"
 				textscale	1
+				textstyle	2
+				font	"fonts/lowpixel"
+			}
+			windowDef q4text1
+			{
+				rect	210,170,180,30
+				visible	1
+				forecolor	1,1,1,1
+				text	"Jillian Jacinto"
+				textscale	0.5
 				textstyle	2
 				font	"fonts/lowpixel"
 			}
